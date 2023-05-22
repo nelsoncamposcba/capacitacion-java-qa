@@ -1,9 +1,15 @@
 package clase_2.tarea;
 
+import java.util.Arrays;
+
 public class Ejercicio7 {
     public static void main(String[] args) {
         //Declaramos un array con numeros enteros desordenados
         int[] numeros = {5, 9, 2, 1, 8, 4, 7, 6, 3};
+        //int[] numeros = {5, 9, 2, 8};
+
+
+        System.out.println("Array original: " + Arrays.toString(numeros));
 
         //El 1° ciclo itera todos los elementos, menos el último
         for (int i = 0; i < numeros.length - 1; i++) {
@@ -15,6 +21,7 @@ public class Ejercicio7 {
                 //que el elemento en la posición 'i'
                 //En el caso que sea verdadero, procede el cambio
                 if (numeros[j] > numeros[i]) {
+                    System.out.println("Hay Movimiento: " + numeros[j] + " " + numeros[i]);
 
                     //Se crea una variable temporal
                     int temp = numeros[i];
@@ -24,7 +31,12 @@ public class Ejercicio7 {
 
                     //Reemplaza con el valor temporal
                     numeros[j] = temp;
+
+                    System.out.println("Fin Movimiento: " + Arrays.toString(numeros));
                 }
+
+                System.out.println("Parcial: " + Arrays.toString(numeros));
+
             }
         }
 
