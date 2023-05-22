@@ -1,7 +1,5 @@
 package clase_2.tarea;
 
-import java.util.Arrays;
-
 public class Ejercicio9 {
     public static void main(String[] args) {
         int[] numeros = {5, 9, 2, 1, 8, 4, 7, 6, 3};
@@ -30,6 +28,6 @@ public class Ejercicio9 {
         }
         cadena = cadena + "]";
 
-        System.out.println("Array ordenado: " + Arrays.toString(numeros));
+        System.out.println("Array ordenado: " + cadena);
     }
 }
