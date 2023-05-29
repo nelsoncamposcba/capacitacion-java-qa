@@ -1,11 +1,15 @@
-package clase_3.tarea;
+package clase_4.tarea;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Concesionario {
-    private final AutoConcesionario[] inventario;
+    private final List<Vehiculo> inventario;
     private final String nombreConcesionario;
 
     public Concesionario(String nombreConcesionario) {
-        this.inventario = new AutoConcesionario[5];
+        this.inventario = new ArrayList<>();
         this.nombreConcesionario = nombreConcesionario;
     }
 
@@ -13,25 +17,16 @@ public class Concesionario {
         return nombreConcesionario;
     }
 
-    public void agregarAuto(AutoConcesionario nuevoAutoConcesionario) {
-        //inventario -> [null, null, null, null, null]
-        //inventario -> [AutoUno, null, null, null, null]
-        //inventario -> [AutoUno, AutoDos, null, null, null]
-
-
-        for (int i = 0; i < inventario.length; i++) {
-            if (inventario[i] == null) {
-                inventario[i] = nuevoAutoConcesionario;
-                break;
-            }
-        }
+    public void agregarVehiculo(Vehiculo nuevoVehiculoConcesionario) {
+        this.inventario.add(nuevoVehiculoConcesionario);
     }
 
     public boolean existeAutoInventario(String marca, String modelo, int anio) {
-        //inventario -> [AutoUno, null, null, null, null]
+        for (int i = 0; i < inventario.size(); i++) {
+            if (inventario.get(i).getModelo() == modelo
+                    && inventario.get(i).getMarca() == marca
+                    && inventario.get(i).getAnio() == anio) {
 
-        for (int i = 0; i < inventario.length; i++) {
-            if (inventario[i].getModelo() == modelo && inventario[i].getMarca() == marca && inventario[i].getAno() == anio) {
                 return true;
             }
         }
@@ -40,9 +35,13 @@ public class Concesionario {
     }
 
     public void venderAuto(String marca, String modelo, int anio) {
-        for (int i = 0; i < inventario.length; i++) {
-            if (inventario[i] != null && inventario[i].getModelo() == modelo && inventario[i].getMarca() == marca && inventario[i].getAno() == anio) {
-                inventario[i] = null;
+        for (int i = 0; i < this.inventario.size(); i++) {
+            if (inventario.get(i).getModelo() == modelo
+                    && inventario.get(i).getMarca() == marca
+                    && inventario.get(i).getAnio() == anio) {
+
+
+                inventario.remove(i);
 
                 System.out.println("Auto VENDIDO");
 
@@ -54,53 +53,33 @@ public class Concesionario {
     }
 
     public int cantidadStockInventario() {
-        int stock = 0;
-
-        //inventario -> [AutoUno, AutoDos, null, null, AutoCinco]
-        //stock = 3
-        for (int i = 0; i < inventario.length; i++) {
-            if (inventario[i] != null)
-                stock++; //stock = stock + 1;
-        }
-
-        return stock;
+        return this.inventario.size();
     }
 
     public int cantidadVendido() {
         int ventas = 0;
 
-        //inventario -> [AutoUno, AutoDos, null, null, AutoCinco]
-        //ventas = 2
+        /*
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] == null)
                 ventas++; //ventas = ventas + 1;
         }
+        */
 
         return ventas;
     }
 
     public void visualizarInventarioPrecioAscendente() {
-        int n = this.inventario.length;
-
-        //Nos indicará si tenemos stock o no
-        boolean sinStock = true;
-
-        //Recorremos el inventario
-        for (int i = 0; i < n; i++) {
-            if(this.inventario[i] != null) {
-                //Si existe algo en el stock, actualizamos la variable y cortamos la ejecución del ciclo
-                sinStock = false;
-                break;
-            }
-        }
-
-        //Si no hay stock (sinStock=true)
-        if(sinStock == true){
+        int n = this.inventario.size();
+        if(n == 0){
             //Mostramos por pantalla el mensaje y cortamos la ejecución del método (return)
             System.out.println("Se vendió todo");
             return;
         }
 
+        List<Vehiculo> autosOrdenados = null;
+
+        /*
         //En caso que tenemos stock (sinStock=false)
         //Creamos un array temp con valor null
         AutoConcesionario[] autosOrdenados = new AutoConcesionario[n];
@@ -137,16 +116,17 @@ public class Concesionario {
             }
         }
 
+         */
+
 
         //Imprimimos el inventario
         System.out.println("El inventario actual es: ");
-        for (int i = 0; i < autosOrdenados.length; i++) {
-
-            if(autosOrdenados[i] != null){
-                System.out.println("Marca: " + autosOrdenados[i].getMarca() +
-                        " - Modelo: " + autosOrdenados[i].getModelo() +
-                        " - Año: " + autosOrdenados[i].getAno() +
-                        " - Precio: $ " + autosOrdenados[i].getPrecio()
+        for (int i = 0; i < autosOrdenados.size(); i++) {
+            if(autosOrdenados.get(i) != null){
+                System.out.println("Marca: " + autosOrdenados.get(i).getMarca() +
+                        " - Modelo: " + autosOrdenados.get(i).getModelo() +
+                        " - Año: " + autosOrdenados.get(i).getAnio() +
+                        " - Precio: $ " + autosOrdenados.get(i).getPrecio()
                 );
             }
         }
