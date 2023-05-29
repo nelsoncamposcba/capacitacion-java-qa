@@ -14,6 +14,11 @@ public class Concesionario {
     }
 
     public void agregarAuto(AutoConcesionario nuevoAutoConcesionario) {
+        //inventario -> [null, null, null, null, null]
+        //inventario -> [AutoUno, null, null, null, null]
+        //inventario -> [AutoUno, AutoDos, null, null, null]
+
+
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] == null) {
                 inventario[i] = nuevoAutoConcesionario;
@@ -23,6 +28,8 @@ public class Concesionario {
     }
 
     public boolean existeAutoInventario(String marca, String modelo, int anio) {
+        //inventario -> [AutoUno, null, null, null, null]
+
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i].getModelo() == modelo && inventario[i].getMarca() == marca && inventario[i].getAno() == anio) {
                 return true;
@@ -49,6 +56,8 @@ public class Concesionario {
     public int cantidadStockInventario() {
         int stock = 0;
 
+        //inventario -> [AutoUno, AutoDos, null, null, AutoCinco]
+        //stock = 3
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] != null)
                 stock++; //stock = stock + 1;
@@ -60,6 +69,8 @@ public class Concesionario {
     public int cantidadVendido() {
         int ventas = 0;
 
+        //inventario -> [AutoUno, AutoDos, null, null, AutoCinco]
+        //ventas = 2
         for (int i = 0; i < inventario.length; i++) {
             if (inventario[i] == null)
                 ventas++; //ventas = ventas + 1;
@@ -76,7 +87,6 @@ public class Concesionario {
 
         //Recorremos el inventario
         for (int i = 0; i < n; i++) {
-
             if(this.inventario[i] != null) {
                 //Si existe algo en el stock, actualizamos la variable y cortamos la ejecución del ciclo
                 sinStock = false;

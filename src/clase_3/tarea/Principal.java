@@ -21,6 +21,10 @@ public class Principal {
         concesionario.agregarAuto(autoConcesionarioCuatro);
         concesionario.agregarAuto(autoConcesionarioCinco);
 
+        //Stock actual
+        concesionario.visualizarInventarioPrecioAscendente();
+
+
         //Buscamos un auto existente
         System.out.println("Existe el auto Peugeot - 206 - 2000: " + concesionario.existeAutoInventario("Peugeot", "206", 2000));
 
