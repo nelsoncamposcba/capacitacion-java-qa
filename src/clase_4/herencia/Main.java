@@ -1,4 +1,4 @@
-package clase_4;
+package clase_4.herencia;
 
 public class Main {
     public static void main(String[] args) {

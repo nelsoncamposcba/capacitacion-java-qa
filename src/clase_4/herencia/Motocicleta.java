@@ -1,4 +1,4 @@
-package clase_4;
+package clase_4.herencia;
 
 public class Motocicleta extends Vehiculo{
     private int cilindrada;
