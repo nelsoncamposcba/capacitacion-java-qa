@@ -2,11 +2,14 @@ package clase_4.tarea;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Concesionario {
     private final List<Vehiculo> inventario;
     private final String nombreConcesionario;
+
+    private int cantidadVehiculosVendidos;
 
     public Concesionario(String nombreConcesionario) {
         this.inventario = new ArrayList<>();
@@ -40,8 +43,11 @@ public class Concesionario {
                     && inventario.get(i).getMarca() == marca
                     && inventario.get(i).getAnio() == anio) {
 
-
+                //Eliminamos el elemento de la lista
                 inventario.remove(i);
+
+                //Aumente en 1 cada vez que venda.
+                this.cantidadVehiculosVendidos++; //this.cantidadVehiculosVendidos = this.cantidadVehiculosVendidos + 1;
 
                 System.out.println("Auto VENDIDO");
 
@@ -57,16 +63,7 @@ public class Concesionario {
     }
 
     public int cantidadVendido() {
-        int ventas = 0;
-
-        /*
-        for (int i = 0; i < inventario.length; i++) {
-            if (inventario[i] == null)
-                ventas++; //ventas = ventas + 1;
-        }
-        */
-
-        return ventas;
+        return this.cantidadVehiculosVendidos;
     }
 
     public void visualizarInventarioPrecioAscendente() {
@@ -76,57 +73,32 @@ public class Concesionario {
             System.out.println("Se vendió todo");
             return;
         }
+/*
+        Collections.sort(this.inventario, new Comparator<Vehiculo>() {
+            @Override
+            public int compare(Vehiculo o1, Vehiculo o2) {
+                // positivo -> o1 > o2
+                // negativo -> o1 < o2
+                // cero -> o1 == o2
+                // Si queremos ordenar de forma ascendente, devuelve un valor negativo si o1 < o2
 
-        List<Vehiculo> autosOrdenados = null;
-
-        /*
-        //En caso que tenemos stock (sinStock=false)
-        //Creamos un array temp con valor null
-        AutoConcesionario[] autosOrdenados = new AutoConcesionario[n];
-
-        // Se copian todos los elementos del array original en el nuevo array utilizando un bucle for
-        for (int i = 0; i < n; i++) {
-            autosOrdenados[i] = this.inventario[i];
-        }
-
-
-        // Se recorre desde el primer elemento hasta el penúltimo del array nuevo
-        for (int i = 0; i < n - 1; i++) {
-            // Indice que tiene al Auto con menor precio
-            int minIndex = i;
-
-            // Este bucle interno es encontrar el índice del elemento con el precio mínimo en el array
-            for (int j = i + 1; j < n; j++) {
-
-                // Verifica que el
-                // - elemento en el índice actual no sea nulo
-                // - y que el elemento en el índice de precio mínimo sea nulo o tenga un precio mayor al del elemento actual
-                if (autosOrdenados[j] != null && (autosOrdenados[minIndex] == null || autosOrdenados[j].getPrecio() < autosOrdenados[minIndex].getPrecio())) {
-                    // Indice mínimo se actualiza al índice actual
-                    minIndex = j;
-                }
+                return Double.compare(o1.getPrecio(), o2.getPrecio());
             }
+        });
+        */
 
-            // Se verifica si es diferente del índice actual
-            if (minIndex != i) {
-                // Si son diferentes, se intercambian los elementos en los índices actuales y mínimos utilizando una variable temporal
-                AutoConcesionario temp = autosOrdenados[i];
-                autosOrdenados[i] = autosOrdenados[minIndex];
-                autosOrdenados[minIndex] = temp;
-            }
-        }
+        this.inventario.sort((v1, v2) -> Double.compare(v1.getPrecio(), v2.getPrecio()));
 
-         */
-
+        //this.inventario.sort(Comparator.comparingDouble(Vehiculo::getPrecio));
 
         //Imprimimos el inventario
         System.out.println("El inventario actual es: ");
-        for (int i = 0; i < autosOrdenados.size(); i++) {
-            if(autosOrdenados.get(i) != null){
-                System.out.println("Marca: " + autosOrdenados.get(i).getMarca() +
-                        " - Modelo: " + autosOrdenados.get(i).getModelo() +
-                        " - Año: " + autosOrdenados.get(i).getAnio() +
-                        " - Precio: $ " + autosOrdenados.get(i).getPrecio()
+        for (int i = 0; i < this.inventario.size(); i++) {
+            if(this.inventario.get(i) != null){
+                System.out.println("Marca: " + this.inventario.get(i).getMarca() +
+                        " - Modelo: " + this.inventario.get(i).getModelo() +
+                        " - Año: " + this.inventario.get(i).getAnio() +
+                        " - Precio: $ " + this.inventario.get(i).getPrecio()
                 );
             }
         }
